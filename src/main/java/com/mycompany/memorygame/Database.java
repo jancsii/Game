@@ -7,6 +7,7 @@ package com.mycompany.memorygame;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,9 +24,12 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -33,6 +37,10 @@ import org.xml.sax.SAXException;
  * @author jancsi
  */
 public class Database{
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(Database.class);
+    
+    LinkedList<Integer> scores = new LinkedList<>();
     
     private Name data;
     
@@ -91,7 +99,7 @@ public class Database{
             Transformer t = tf.newTransformer();
             
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("src/main/resources/xml/tempDatas.xml"));
+            StreamResult result = new StreamResult(new File("target/classes/xml/tempDatas.xml"));
             
             t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             t.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -110,8 +118,8 @@ public class Database{
     
     public void concatenateXML()
     {
-        File file1 = new File("src/main/resources/xml/tempDatas.xml");
-        File file2 = new File("src/main/resources/xml/datas.xml");
+        File file1 = new File("target/classes/xml/tempDatas.xml");
+        File file2 = new File("target/classes/xml/datas.xml");
         Document doc = concatenateFiles("players", file1, file2);
         write(doc);
     }
@@ -170,7 +178,7 @@ public class Database{
     {
         try
         {
-            File file = new File("src/main/resources/xml/datas.xml");
+            File file = new File("target/classes/xml/datas.xml");
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
@@ -187,4 +195,28 @@ public class Database{
         }
     }
     
+    public void read()
+    {
+        try
+        {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            File score = new File("target/classes/xml/datas.xml");
+            Document doc = db.parse(score);
+            doc.getDocumentElement().normalize();
+            NodeList n = doc.getElementsByTagName("player");
+            
+            for( int i=0; i<n.getLength(); i++)
+            {
+                Element e = (Element) n.item(i);
+                
+                scores.add(Integer.parseInt(e.getElementsByTagName("score").item(0).getTextContent()));
+            }
+            c.maxScore(scores);
+        }
+        catch(ParserConfigurationException | SAXException | IOException e)
+        {
+            LOGGER.error(e.getMessage());
+        }
+    }
 }

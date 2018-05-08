@@ -249,4 +249,27 @@ public class Cards {
             return this.score +5;
         }
         
+        int max = 0;
+        public void maxScore(LinkedList<Integer> goals)
+        {
+            
+            for(int i=0; i<goals.size(); i++)
+            {
+                if(goals.get(i) > max)
+                    max = goals.get(i);
+                    
+            }
+        }
+        
+        public int getMax()
+        {
+            return max;
+        }
+        
+        public boolean newMaxScore()
+        {
+            return getScore() > max;
+                
+        }
+        
 }

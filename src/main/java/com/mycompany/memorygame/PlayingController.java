@@ -8,10 +8,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -44,19 +41,10 @@ public class PlayingController implements Initializable {
     private Pane pane;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException{
+    private void handleButtonAction(ActionEvent event) throws IOException
+    {
         Stage stage = (Stage) label.getScene().getWindow();
-        
-        FXMLLoader f2 = new FXMLLoader(getClass().getResource("/fxml/SignIn.fxml")); 
-        Parent root = f2.load();
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("Memory Game");
-        stage.setScene(scene);
-        stage.show();
-        
+        stage.close();
     }
        
     public String megnyomva()
@@ -166,6 +154,8 @@ public class PlayingController implements Initializable {
     
     boolean change;
     
+    Database database = Database.getPeldany();
+    
     @FXML
     private void change(MouseEvent event)
     {
@@ -175,7 +165,7 @@ public class PlayingController implements Initializable {
         String tempId = b.getId();
         boolean tempCheck;
         tempCheck = cards.getChecked(tempId);
-
+        
         try
         {      
             if(buttons.size() < 2 && tempCheck==true)
@@ -186,7 +176,7 @@ public class PlayingController implements Initializable {
             }
             else if(buttons.size() == 2 && tempCheck==true)
             {   
-                LOGGER.debug("Checking cards: {} and {}", buttons.get(0), buttons.get(1));
+                LOGGER.info("Checking cards: {} and {}", buttons.get(0).getId(), buttons.get(1).getId());
                 change = cards.tesztel(buttons.get(0).getId(), buttons.get(1).getId());
                 if(!change)
                 {
@@ -223,21 +213,22 @@ public class PlayingController implements Initializable {
                 {
                     buttons.get(0).setDisable(true);
                     buttons.get(1).setDisable(true);
-                    System.out.println("VEGEEEEEEEEEEE");
-                    System.out.println("Total: " + cards.getTotalPairs());
-                    System.out.println("Accuracy: " + cards.getAccuracy() + " %");
-                    System.out.println("Score: " + cards.getScore());
+                    LOGGER.info("Vege...");
+                    LOGGER.info("Total: " + cards.getTotalPairs());
+                    LOGGER.info("Accuracy: " + cards.getAccuracy() + " %");
+                    LOGGER.info("Score: " + cards.getScore());
                     
                     try
                     {
-                        Database database = Database.getPeldany();
+                        
+                        //database.read();
                         database.getCards(cards);
                         database.init();
                         database.concatenateXML();
             
                     }catch(Exception e)
-                    {
-                        System.out.println("Error :"+e.getMessage());
+                    {   
+                        LOGGER.error(e.getMessage());
                     }
                 }
             }
@@ -245,7 +236,7 @@ public class PlayingController implements Initializable {
         }
         catch(Exception e)
         {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
         }      
     }
     
@@ -279,6 +270,8 @@ public class PlayingController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //Database database = Database.getPeldany();
+        //database.read();
+        //label.setText(Integer.toString(cards.getMax()));
     }    
 }

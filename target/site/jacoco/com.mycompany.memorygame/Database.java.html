@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Database.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MemoryGame</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.memorygame</a> &gt; <span class="el_source">Database.java</span></div><h1>Database.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.memorygame;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.LinkedList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+/**
+ *
+ * @author jancsi
+ */
+public class Database{
+    
+<span class="nc" id="L41">    private static final Logger LOGGER = LoggerFactory.getLogger(Database.class);</span>
+    
+<span class="nc" id="L43">    LinkedList&lt;Integer&gt; scores = new LinkedList&lt;&gt;();</span>
+    
+    private Name data;
+    
+    //private Database() {}
+    
+    private static Database peldany;
+    
+    public static Database getPeldany()
+    {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(peldany == null)</span>
+<span class="nc" id="L54">            peldany = new Database();</span>
+<span class="nc" id="L55">        return peldany;</span>
+    }
+
+    public void setData(Name data) {
+<span class="nc" id="L59">        this.data = data;</span>
+<span class="nc" id="L60">    }</span>
+    
+    private Cards c;
+    
+    Database()
+<span class="nc" id="L65">    {</span>
+<span class="nc" id="L66">        this.c = null;</span>
+<span class="nc" id="L67">    }</span>
+    
+    public void getCards(Cards cards)
+    {
+<span class="nc" id="L71">        this.c = cards;</span>
+<span class="nc" id="L72">    }</span>
+    
+    public void init()
+    {
+        try
+        {
+<span class="nc" id="L78">            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
+<span class="nc" id="L79">            DocumentBuilder db = dbf.newDocumentBuilder();</span>
+            
+<span class="nc" id="L81">            Document doc = db.newDocument();</span>
+            
+<span class="nc" id="L83">            Element players = doc.createElement(&quot;players&quot;);</span>
+<span class="nc" id="L84">            doc.appendChild(players);</span>
+            
+<span class="nc" id="L86">            Element player = doc.createElement(&quot;player&quot;);</span>
+<span class="nc" id="L87">            players.appendChild(player);</span>
+            
+<span class="nc" id="L89">            Element name = doc.createElement(&quot;name&quot;);</span>
+<span class="nc" id="L90">            name.appendChild(doc.createTextNode(data.getNamefield()));</span>
+<span class="nc" id="L91">            System.out.println(data.getNamefield());</span>
+<span class="nc" id="L92">            player.appendChild(name);</span>
+            
+<span class="nc" id="L94">            Element score = doc.createElement(&quot;score&quot;);</span>
+<span class="nc" id="L95">            score.appendChild(doc.createTextNode(Integer.toString(c.getScore())));</span>
+<span class="nc" id="L96">            player.appendChild(score);</span>
+            
+<span class="nc" id="L98">            TransformerFactory tf = TransformerFactory.newInstance();</span>
+<span class="nc" id="L99">            Transformer t = tf.newTransformer();</span>
+            
+<span class="nc" id="L101">            DOMSource source = new DOMSource(doc);</span>
+<span class="nc" id="L102">            StreamResult result = new StreamResult(new File(&quot;target/classes/xml/tempDatas.xml&quot;));</span>
+            
+<span class="nc" id="L104">            t.setOutputProperty(OutputKeys.ENCODING, &quot;UTF-8&quot;);</span>
+<span class="nc" id="L105">            t.setOutputProperty(OutputKeys.INDENT, &quot;yes&quot;);</span>
+<span class="nc" id="L106">            t.setOutputProperty(&quot;{http://xml.apche.org/xslt}indent-amount&quot;, &quot;4&quot;);</span>
+<span class="nc" id="L107">            t.transform(source, result);</span>
+        
+<span class="nc" id="L109">        }catch(TransformerConfigurationException | ParserConfigurationException e)</span>
+        {
+<span class="nc" id="L111">            System.out.println(e.getMessage());</span>
+            
+<span class="nc" id="L113">        }catch (TransformerException e) </span>
+        {
+<span class="nc" id="L115">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L116">        }</span>
+<span class="nc" id="L117">    }</span>
+    
+    public void concatenateXML()
+    {
+<span class="nc" id="L121">        File file1 = new File(&quot;target/classes/xml/tempDatas.xml&quot;);</span>
+<span class="nc" id="L122">        File file2 = new File(&quot;target/classes/xml/datas.xml&quot;);</span>
+<span class="nc" id="L123">        Document doc = concatenateFiles(&quot;players&quot;, file1, file2);</span>
+<span class="nc" id="L124">        write(doc);</span>
+<span class="nc" id="L125">    }</span>
+    
+    private static Document concatenateFiles(String expressions, File... files)
+    {
+        try
+        {
+<span class="nc" id="L131">            XPathFactory xPathFactory = XPathFactory.newInstance();</span>
+<span class="nc" id="L132">            XPath xPath = xPathFactory.newXPath();</span>
+<span class="nc" id="L133">            XPathExpression compiledExpression = xPath.compile(expressions);</span>
+<span class="nc" id="L134">            return concatenatePaths(compiledExpression, files);</span>
+        } 
+<span class="nc" id="L136">        catch(XPathExpressionException e)</span>
+        {
+<span class="nc" id="L138">            System.out.println(e.getMessage());</span>
+        }
+<span class="nc" id="L140">        return null;</span>
+    }
+    
+    private static Document concatenatePaths(XPathExpression expressions, File... files)
+    {
+        try
+        {
+<span class="nc" id="L147">            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();</span>
+<span class="nc" id="L148">            docBuilderFactory.setIgnoringElementContentWhitespace(true);</span>
+<span class="nc" id="L149">            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();</span>
+<span class="nc" id="L150">            Document base = docBuilder.parse(files[0]);</span>
+<span class="nc" id="L151">            Node results = (Node) expressions.evaluate(base, XPathConstants.NODE);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">            if(results == null)</span>
+            {
+<span class="nc" id="L154">                throw new IOException(files[0] + &quot; Doesn't exist node&quot;);</span>
+            }
+<span class="nc bnc" id="L156" title="All 2 branches missed.">            for(int i=1; i&lt;files.length; i++)</span>
+            {
+<span class="nc" id="L158">                Document concat = docBuilder.parse(files[i]);</span>
+<span class="nc" id="L159">                Node result = (Node) expressions.evaluate(concat, XPathConstants.NODE);</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">                while(result.hasChildNodes())</span>
+                {
+<span class="nc" id="L162">                    Node child = result.getFirstChild();</span>
+<span class="nc" id="L163">                    result.removeChild(child);</span>
+<span class="nc" id="L164">                    child = base.importNode(child, true);</span>
+<span class="nc" id="L165">                    results.appendChild(child);</span>
+<span class="nc" id="L166">                }</span>
+            }
+<span class="nc" id="L168">            return base;</span>
+        }
+<span class="nc" id="L170">        catch(ParserConfigurationException | SAXException | IOException | XPathExpressionException e)</span>
+        {
+<span class="nc" id="L172">            System.out.println(e.getMessage());</span>
+        }
+<span class="nc" id="L174">        return null;</span>
+    }
+    
+    private static void write(Document doc)
+    {
+        try
+        {
+<span class="nc" id="L181">            File file = new File(&quot;target/classes/xml/datas.xml&quot;);</span>
+<span class="nc" id="L182">            TransformerFactory transformerFactory = TransformerFactory.newInstance();</span>
+<span class="nc" id="L183">            Transformer transformer = transformerFactory.newTransformer();</span>
+<span class="nc" id="L184">            DOMSource source = new DOMSource(doc);</span>
+<span class="nc" id="L185">            Result result = new StreamResult(file);</span>
+<span class="nc" id="L186">            transformer.transform(source, result);</span>
+        }
+<span class="nc" id="L188">        catch(TransformerConfigurationException e)</span>
+        {
+<span class="nc" id="L190">            System.out.println(e.getMessage());</span>
+        }
+<span class="nc" id="L192">        catch(TransformerException e)</span>
+        {
+<span class="nc" id="L194">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L195">        }</span>
+<span class="nc" id="L196">    }</span>
+    
+    public void read()
+    {
+        try
+        {
+<span class="nc" id="L202">            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span>
+<span class="nc" id="L203">            DocumentBuilder db = dbf.newDocumentBuilder();</span>
+<span class="nc" id="L204">            File score = new File(&quot;target/classes/xml/datas.xml&quot;);</span>
+<span class="nc" id="L205">            Document doc = db.parse(score);</span>
+<span class="nc" id="L206">            doc.getDocumentElement().normalize();</span>
+<span class="nc" id="L207">            NodeList n = doc.getElementsByTagName(&quot;player&quot;);</span>
+            
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            for( int i=0; i&lt;n.getLength(); i++)</span>
+            {
+<span class="nc" id="L211">                Element e = (Element) n.item(i);</span>
+                
+<span class="nc" id="L213">                scores.add(Integer.parseInt(e.getElementsByTagName(&quot;score&quot;).item(0).getTextContent()));</span>
+            }
+<span class="nc" id="L215">            c.maxScore(scores);</span>
+        }
+<span class="nc" id="L217">        catch(ParserConfigurationException | SAXException | IOException e)</span>
+        {
+<span class="nc" id="L219">            LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L220">        }</span>
+<span class="nc" id="L221">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

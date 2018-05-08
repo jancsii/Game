@@ -4,10 +4,16 @@
  * and open the template in the editor.
  */
 
+import com.mycompany.memorygame.Cards;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 /**
  *
  * @author jancsi
  */
-public class testCards {
+public class CardsTest {
+    
+    
     
 }
