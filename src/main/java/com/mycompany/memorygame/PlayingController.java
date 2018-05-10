@@ -221,10 +221,15 @@ public class PlayingController implements Initializable {
                 {
                     buttons.get(0).setDisable(true);
                     buttons.get(1).setDisable(true);
-                    LOGGER.info("Vege...");
+                    LOGGER.debug("Vege...");
                     LOGGER.info("Total: " + cards.getTotalPairs());
                     LOGGER.info("Accuracy: " + cards.getAccuracy() + " %");
                     LOGGER.info("Score: " + cards.getScore());
+                    
+                    if(cards.newMaxScore())
+                        LOGGER.info("Congratulations, New Record: " + cards.getScore());
+                    else
+                        LOGGER.info("Good job, your score: " + cards.getScore());
                     
                     try
                     {
@@ -251,7 +256,7 @@ public class PlayingController implements Initializable {
     
     public void setImages()
     {
-        LOGGER.info("Loading the start position.");
+        LOGGER.debug("Loading the start position.");
         
         blacks.add(btn1);
         blacks.add(btn2);
@@ -288,7 +293,7 @@ public class PlayingController implements Initializable {
         database = Database.getPeldany();
         
         database.read();
-        label.setText(Integer.toString(cards.getMax()));
+        label.setText("Rekord: " + String.valueOf(cards.getMax()) + " pont");
     }
         
 }

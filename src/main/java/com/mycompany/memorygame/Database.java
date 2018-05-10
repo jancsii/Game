@@ -153,7 +153,7 @@ public class Database{
         } 
         catch(XPathExpressionException e)
         {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return null;
     }
@@ -187,7 +187,7 @@ public class Database{
         }
         catch(ParserConfigurationException | SAXException | IOException | XPathExpressionException e)
         {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         return null;
     }
@@ -205,27 +205,22 @@ public class Database{
         }
         catch(TransformerConfigurationException e)
         {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         catch(TransformerException e)
         {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
     }
     
     public void read()
     {
-        System.out.println("Hellooooo");
         try
         {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            System.out.println("1");
             DocumentBuilder db = dbf.newDocumentBuilder();
-            System.out.println("2");
             File score = new File("target/classes/xml/datas.xml");
-            System.out.println("3");
             Document doc = db.parse(score);
-            System.out.println("4");
             doc.getDocumentElement().normalize();
             NodeList n = doc.getElementsByTagName("player");
             System.out.println(n.getLength());
@@ -234,13 +229,10 @@ public class Database{
                 Element e = (Element) n.item(i);
                 
                 scores.add(Integer.parseInt(e.getElementsByTagName("score").item(0).getTextContent()));
-                System.out.println(e.getElementsByTagName("score").item(0).getTextContent());
                 
             }
-            System.out.println(c);
             c.maxScore(scores);
-            System.out.println("6");
-            System.out.println(scores);
+            LOGGER.info("Reading in...");
         }
         catch(ParserConfigurationException | SAXException | IOException e)
         {

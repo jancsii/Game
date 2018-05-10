@@ -16,7 +16,7 @@ public class MainApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        LOGGER.info("Application started!");
+        LOGGER.trace("Application started!");
         
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/SignIn.fxml"));
         
@@ -41,7 +41,7 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        LOGGER.info("Loading...");
+        LOGGER.debug("Loading...");
         launch(args);
     }
 

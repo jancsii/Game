@@ -5,11 +5,54 @@
   <artifactId>MemoryGame</artifactId>
   <name>MemoryGame</name>
   <version>1.0</version>
+  <description>This project is a game application, which is similar to the original memory game.</description>
+  <inceptionYear>2018</inceptionYear>
+  <developers>
+    <developer>
+      <id>jancsii</id>
+      <name>Mierlut János</name>
+      <email>jancsi.mierlut15@gmail@gmail.com</email>
+      <organization>Faculty of Informatics, University of Debrecen</organization>
+      <organizationUrl>http://www.inf.unideb.hu/</organizationUrl>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>GNU General Public License (GPL) version 3.0</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+    </license>
+  </licenses>
   <organization>
-    <name>Your Organisation</name>
+    <name>Faculty of Informatics, University of Debrecen</name>
   </organization>
   <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
     <plugins>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.0.0-M1</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[1.8,)</version>
+                  <message>JDK 1.8.x or higher required.</message>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
         <version>2.6</version>
@@ -40,7 +83,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>${exec.MainApp}</mainClass>
+                  <mainClass>${exec.mainClass}</mainClass>
                 </transformer>
               </transformers>
               <minimizeJar>true</minimizeJar>
@@ -60,7 +103,7 @@
             <configuration>
               <archive>
                 <manifest>
-                  <mainClass>${exec.MainApp}</mainClass>
+                  <mainClass>${exec.mainClass}</mainClass>
                 </manifest>
               </archive>
               <descriptorRefs>
@@ -121,23 +164,41 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.7.201606060606</version>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.0</version>
         <executions>
           <execution>
+            <id>attach-javadocs</id>
             <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
+              <goal>jar</goal>
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.openclover</groupId>
+        <artifactId>clover-maven-plugin</artifactId>
+        <version>4.2.0</version>
+        <executions>
+          <execution>
+            <id>verify</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>instrument</goal>
+              <goal>check</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>pre-site</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>instrument</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <targetPercentage>50%</targetPercentage>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -164,9 +225,44 @@
       </exclusions>
     </dependency>
   </dependencies>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.21.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.5</version>
+      </plugin>
+      <plugin>
+        <groupId>org.openclover</groupId>
+        <artifactId>clover-maven-plugin</artifactId>
+        <version>4.2.0</version>
+        <configuration>
+          <generatePdf>true</generatePdf>
+          <generateHtml>true</generateHtml>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <configLocation>${basedir}/src/main/resources/checkstyle/checkstyle.xml</configLocation>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
   <properties>
+    <license.licenseName>gpl_v3</license.licenseName>
     <mainClass>com.mycompany.memorygame.MainApp</mainClass>
+    <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 </project>
 
