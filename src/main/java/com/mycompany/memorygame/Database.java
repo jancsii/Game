@@ -7,6 +7,9 @@ package com.mycompany.memorygame;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -59,11 +62,15 @@ public class Database{
         this.data = data;
     }
     
-    private Cards c;
+    public Name getData() {
+        return this.data;
+    }
+    
+    Cards c ;
     
     Database()
     {
-        this.c = null;
+        this.c = Cards.getPeldany();
     }
     
     public void getCards(Cards cards)
@@ -120,8 +127,19 @@ public class Database{
     {
         File file1 = new File("target/classes/xml/tempDatas.xml");
         File file2 = new File("target/classes/xml/datas.xml");
+        //try
+       // {
+        //URL u1 = Database.class.getResource("target/classes/xml/tempDatas.xml");
+        //URL u2 = Database.class.getResource("target/classes/xml/datas.xml");
+        //File file1 = Paths.get(u1.toURI()).toFile();
+        //File file2 = Paths.get(u1.toURI()).toFile();
         Document doc = concatenateFiles("players", file1, file2);
         write(doc);
+        //}
+        //catch(URISyntaxException e)
+        //{
+         //   LOGGER.error(e.getMessage());
+       // }
     }
     
     private static Document concatenateFiles(String expressions, File... files)
@@ -197,22 +215,32 @@ public class Database{
     
     public void read()
     {
+        System.out.println("Hellooooo");
         try
         {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            System.out.println("1");
             DocumentBuilder db = dbf.newDocumentBuilder();
+            System.out.println("2");
             File score = new File("target/classes/xml/datas.xml");
+            System.out.println("3");
             Document doc = db.parse(score);
+            System.out.println("4");
             doc.getDocumentElement().normalize();
             NodeList n = doc.getElementsByTagName("player");
-            
+            System.out.println(n.getLength());
             for( int i=0; i<n.getLength(); i++)
             {
                 Element e = (Element) n.item(i);
                 
                 scores.add(Integer.parseInt(e.getElementsByTagName("score").item(0).getTextContent()));
+                System.out.println(e.getElementsByTagName("score").item(0).getTextContent());
+                
             }
+            System.out.println(c);
             c.maxScore(scores);
+            System.out.println("6");
+            System.out.println(scores);
         }
         catch(ParserConfigurationException | SAXException | IOException e)
         {

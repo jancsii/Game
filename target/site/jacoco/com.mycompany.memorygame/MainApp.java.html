@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 <span class="nc" id="L21">        Parent root = FXMLLoader.load(getClass().getResource(&quot;/fxml/SignIn.fxml&quot;));</span>
         
 <span class="nc" id="L23">        Scene scene = new Scene(root);</span>
-<span class="nc" id="L24">        scene.getStylesheets().add(&quot;/styles/Styles.css&quot;);</span>
+<span class="nc" id="L24">        scene.getStylesheets().add(getClass().getResource(&quot;/styles/Styles.css&quot;).toExternalForm());</span>
         
         
         

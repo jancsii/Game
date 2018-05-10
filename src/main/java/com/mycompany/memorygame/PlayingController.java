@@ -1,6 +1,7 @@
 package com.mycompany.memorygame;
 
 
+import com.sun.javafx.css.Style;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,7 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -20,8 +24,9 @@ import org.slf4j.LoggerFactory;
 public class PlayingController implements Initializable {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(PlayingController.class);
+
     
-    Cards cards = new Cards();
+    Cards cards; 
     
     LinkedList<Button> buttons = new LinkedList<>();
     
@@ -154,7 +159,7 @@ public class PlayingController implements Initializable {
     
     boolean change;
     
-    Database database = Database.getPeldany();
+    Database database;
     
     @FXML
     private void change(MouseEvent event)
@@ -162,6 +167,9 @@ public class PlayingController implements Initializable {
         String temp = megnyomva();
         Button b = (Button) event.getSource();
         b.setStyle("-fx-background-image: url('/images/img1/" + temp + ".png')");
+        //Image img1 = new Image(getClass().getClassLoader().getResourceAsStream("/images/img1/" + temp + ".png"));
+        //ImageView iv1 = new ImageView(img1);
+        //b.setStyle("/images/img1/" + temp + ".png");
         String tempId = b.getId();
         boolean tempCheck;
         tempCheck = cards.getChecked(tempId);
@@ -237,7 +245,8 @@ public class PlayingController implements Initializable {
         catch(Exception e)
         {
             LOGGER.error(e.getMessage());
-        }      
+        }
+        
     }
     
     public void setImages()
@@ -265,13 +274,21 @@ public class PlayingController implements Initializable {
         {
             blackb.setStyle("-fx-background-image: url('/images/img1/fekete.png')");
         }
+        
 
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Database database = Database.getPeldany();
-        //database.read();
-        //label.setText(Integer.toString(cards.getMax()));
-    }    
+        onClick();
+        setImages();
+        
+        cards = Cards.getPeldany();
+        database = Database.getPeldany();
+        
+        database.read();
+        label.setText(Integer.toString(cards.getMax()));
+    }
+        
 }

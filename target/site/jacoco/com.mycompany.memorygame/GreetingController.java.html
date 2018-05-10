@@ -3,16 +3,20 @@
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-<span class="nc" id="L15">public class GreetingController implements Initializable {</span>
+<span class="nc" id="L19">public class GreetingController implements Initializable {</span>
     
     @FXML
     private Label labelName;
@@ -23,72 +27,93 @@ import javafx.stage.Stage;
     @FXML
     private Button buttonNext;
     
-<span class="nc" id="L26">    public Database db = Database.getPeldany();</span>
+<span class="nc" id="L30">    public Database db = Database.getPeldany();</span>
     
     public Name construct()
     {
-<span class="nc" id="L30">        NameBuilder builder = new NameBuilderImpl();</span>
-<span class="nc" id="L31">        return builder.setNamefield(textfieldName.getText()).build();</span>
+<span class="nc" id="L34">        NameBuilder builder = new NameBuilderImpl();</span>
+<span class="nc" id="L35">        return builder.setNamefield(textfieldName.getText()).build();</span>
     }
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-<span class="nc" id="L36">        Stage stage = (Stage) labelName.getScene().getWindow();</span>
+<span class="nc" id="L40">        Stage stage = (Stage) labelName.getScene().getWindow();</span>
+        //Stage stage = new Stage(StageStyle.DECORATED);
+<span class="nc" id="L42">        db.setData(construct());</span>
         
-<span class="nc" id="L38">        db.setData(construct());</span>
-<span class="nc" id="L39">        System.out.println(construct().getNamefield());</span>
+<span class="nc" id="L44">        System.out.println(construct().getNamefield());</span>
         
         try
         {
         
-<span class="nc" id="L44">        FXMLLoader f1 = new FXMLLoader(getClass().getResource(&quot;/fxml/Play.fxml&quot;));</span>
+<span class="nc" id="L49">        FXMLLoader f1 = new FXMLLoader((getClass().getResource(&quot;/fxml/Play.fxml&quot;)));</span>
+<span class="nc" id="L50">        Parent root = f1.load();</span>
+        // Parent root = FXMLLoader.load(getClass().getResource(&quot;/fxml/Play.fxml&quot;));
+       
+     //   f1.&lt;PlayingController&gt;getController().setImages();
+       // f1.&lt;PlayingController&gt;getController().onClick();
         
-<span class="nc" id="L46">        Parent root = f1.load();</span>
+<span class="nc" id="L56">        Scene scene = new Scene(root);</span>
+<span class="nc" id="L57">        scene.getStylesheets().add(getClass().getResource(&quot;/styles/Styles.css&quot;).toExternalForm());</span>
         
-<span class="nc" id="L48">        f1.&lt;PlayingController&gt;getController().setImages();</span>
-<span class="nc" id="L49">        f1.&lt;PlayingController&gt;getController().onClick();</span>
+<span class="nc" id="L59">        stage.setTitle(&quot;Memory Game&quot;);</span>
+<span class="nc" id="L60">        stage.setScene(scene);</span>
+<span class="nc" id="L61">        stage.show();</span>
         
-<span class="nc" id="L51">        Scene scene = new Scene(root);</span>
-<span class="nc" id="L52">        scene.getStylesheets().add(&quot;/styles/Styles.css&quot;);</span>
-        
-<span class="nc" id="L54">        stage.setTitle(&quot;Memory Game&quot;);</span>
-<span class="nc" id="L55">        stage.setScene(scene);</span>
-<span class="nc" id="L56">        stage.show();</span>
-        
-        }
-<span class="nc" id="L59">        catch(IOException e)</span>
-        {
-<span class="nc" id="L61">            System.out.println(&quot;Error :&quot;+e.getMessage());</span>
+       // }
+        //
+      //  catch(IOException e)
+        //{
+       //     System.out.println(&quot;Error :&quot;+e.getMessage());
 
-<span class="nc" id="L63">        }</span>
+       // }
         
-<span class="nc" id="L65">    }</span>
+<span class="nc" id="L71">    }   catch (IOException ex) {</span>
+<span class="nc" id="L72">            Logger.getLogger(GreetingController.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L73">        }</span>
+<span class="nc" id="L74">    }</span>
+    
+    /*@FXML
+    private void handleButtonAction(ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(&quot;/resources/fxml/Play.fxml&quot;));
+            Scene scene = new Scene(root);
+            Stage stage= new Stage(StageStyle.DECORATED);
+            stage.setScene(scene);
+            stage.setTitle(&quot;Kezdőlap&quot;);
+            stage.setResizable(false);
+            stage.show();
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(GreetingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
     
     @FXML
     private void goOn(ActionEvent event)
     {
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        if(!&quot;&quot;.equals(textfieldName.getText()))</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if(!&quot;&quot;.equals(textfieldName.getText()))</span>
         {
-<span class="nc" id="L72">            labelGreeting.setMaxWidth(240);</span>
-<span class="nc" id="L73">            labelGreeting.setWrapText(true);</span>
-<span class="nc" id="L74">            labelGreeting.setText(&quot;Welcome &quot; + textfieldName.getText() + &quot;!\nTo start playing, click the button go.&quot;);</span>
+<span class="nc" id="L97">            labelGreeting.setMaxWidth(240);</span>
+<span class="nc" id="L98">            labelGreeting.setWrapText(true);</span>
+<span class="nc" id="L99">            labelGreeting.setText(&quot;Welcome &quot; + textfieldName.getText() + &quot;!\nTo start playing, click the button go.&quot;);</span>
             
-<span class="nc" id="L76">            buttonNext.setVisible(true);</span>
+<span class="nc" id="L101">            buttonNext.setVisible(true);</span>
  
         }
         else
         {
-<span class="nc" id="L81">            labelGreeting.setMaxWidth(240);</span>
-<span class="nc" id="L82">            labelGreeting.setWrapText(true);</span>
-<span class="nc" id="L83">            labelGreeting.setText(&quot;Enter your name!&quot;);</span>
+<span class="nc" id="L106">            labelGreeting.setMaxWidth(240);</span>
+<span class="nc" id="L107">            labelGreeting.setWrapText(true);</span>
+<span class="nc" id="L108">            labelGreeting.setText(&quot;Enter your name!&quot;);</span>
         }
         
         
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L112">    }</span>
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-<span class="nc" id="L92">    }    </span>
+<span class="nc" id="L117">    }    </span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

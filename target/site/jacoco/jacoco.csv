@@ -1,9 +1,9 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-MemoryGame,com.mycompany.memorygame,GreetingController,133,0,2,0,30,0,6,0,5,0
+MemoryGame,com.mycompany.memorygame,GreetingController,125,0,2,0,28,0,6,0,5,0
 MemoryGame,com.mycompany.memorygame,Name,16,0,0,0,8,0,4,0,4,0
-MemoryGame,com.mycompany.memorygame,Card,23,0,0,0,10,0,5,0,5,0
-MemoryGame,com.mycompany.memorygame,MainApp,42,0,0,0,13,0,4,0,4,0
-MemoryGame,com.mycompany.memorygame,Database,366,0,10,0,98,0,16,0,11,0
-MemoryGame,com.mycompany.memorygame,PlayingController,620,0,48,0,113,0,34,0,10,0
+MemoryGame,com.mycompany.memorygame,Card,14,9,0,0,6,4,4,1,4,1
+MemoryGame,com.mycompany.memorygame,MainApp,46,0,0,0,13,0,4,0,4,0
+MemoryGame,com.mycompany.memorygame,Database,407,0,10,0,109,0,17,0,12,0
+MemoryGame,com.mycompany.memorygame,PlayingController,632,0,48,0,117,0,34,0,10,0
 MemoryGame,com.mycompany.memorygame,NameBuilderImpl,17,0,0,0,6,0,3,0,3,0
-MemoryGame,com.mycompany.memorygame,Cards,1004,0,212,0,109,0,172,0,21,0
+MemoryGame,com.mycompany.memorygame,Cards,894,165,203,11,78,35,165,10,17,6

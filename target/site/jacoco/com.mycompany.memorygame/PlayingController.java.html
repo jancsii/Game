@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MemoryGame</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.memorygame</a> &gt; <span class="el_source">PlayingController.java</span></div><h1>PlayingController.java</h1><pre class="source lang-java linenums">package com.mycompany.memorygame;
 
 
+import com.sun.javafx.css.Style;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,25 +12,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-<span class="nc" id="L20">public class PlayingController implements Initializable {</span>
+<span class="nc" id="L24">public class PlayingController implements Initializable {</span>
     
-<span class="nc" id="L22">    private static final Logger LOGGER = LoggerFactory.getLogger(PlayingController.class);</span>
+<span class="nc" id="L26">    private static final Logger LOGGER = LoggerFactory.getLogger(PlayingController.class);</span>
+
     
-<span class="nc" id="L24">    Cards cards = new Cards();</span>
+    Cards cards; 
     
-<span class="nc" id="L26">    LinkedList&lt;Button&gt; buttons = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L31">    LinkedList&lt;Button&gt; buttons = new LinkedList&lt;&gt;();</span>
     
-<span class="nc" id="L28">    ArrayList&lt;Button&gt; blacks = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L33">    ArrayList&lt;Button&gt; blacks = new ArrayList&lt;&gt;();</span>
     
-<span class="nc" id="L30">    LinkedList&lt;Boolean&gt; goals = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L35">    LinkedList&lt;Boolean&gt; goals = new LinkedList&lt;&gt;();</span>
     
-<span class="nc" id="L32">    int j = 0;</span>
+<span class="nc" id="L37">    int j = 0;</span>
     
     @FXML
     private Label label;
@@ -43,90 +48,90 @@ import org.slf4j.LoggerFactory;
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException
     {
-<span class="nc" id="L46">        Stage stage = (Stage) label.getScene().getWindow();</span>
-<span class="nc" id="L47">        stage.close();</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L51">        Stage stage = (Stage) label.getScene().getWindow();</span>
+<span class="nc" id="L52">        stage.close();</span>
+<span class="nc" id="L53">    }</span>
        
     public String megnyomva()
     {
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(btn1.isHover())</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if(btn1.isHover())</span>
         {
-<span class="nc" id="L54">            return cards.getKartya(0,0);</span>
+<span class="nc" id="L59">            return cards.getKartya(0,0);</span>
         }
         else{
-<span class="nc bnc" id="L57" title="All 2 branches missed.">            if(btn2.isHover())</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if(btn2.isHover())</span>
             {
-<span class="nc" id="L59">                return cards.getKartya(0,1);</span>
+<span class="nc" id="L64">                return cards.getKartya(0,1);</span>
             }
             else{
-<span class="nc bnc" id="L62" title="All 2 branches missed.">            if(btn3.isHover())</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            if(btn3.isHover())</span>
             {
-<span class="nc" id="L64">                return cards.getKartya(0,2);</span>
+<span class="nc" id="L69">                return cards.getKartya(0,2);</span>
             }
             else{
-<span class="nc bnc" id="L67" title="All 2 branches missed.">            if(btn4.isHover())</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">            if(btn4.isHover())</span>
             {
-<span class="nc" id="L69">                return cards.getKartya(0,3);</span>
+<span class="nc" id="L74">                return cards.getKartya(0,3);</span>
             }
             else{
-<span class="nc bnc" id="L72" title="All 2 branches missed.">            if(btn5.isHover())</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if(btn5.isHover())</span>
             {
-<span class="nc" id="L74">                return cards.getKartya(1,0);</span>
+<span class="nc" id="L79">                return cards.getKartya(1,0);</span>
             }
             else{
-<span class="nc bnc" id="L77" title="All 2 branches missed.">            if(btn6.isHover())</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            if(btn6.isHover())</span>
             {
-<span class="nc" id="L79">                return cards.getKartya(1,1);</span>
+<span class="nc" id="L84">                return cards.getKartya(1,1);</span>
             }
             else{
-<span class="nc bnc" id="L82" title="All 2 branches missed.">            if(btn7.isHover())</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if(btn7.isHover())</span>
             {
-<span class="nc" id="L84">                return cards.getKartya(1,2);</span>
+<span class="nc" id="L89">                return cards.getKartya(1,2);</span>
             }
             else{
-<span class="nc bnc" id="L87" title="All 2 branches missed.">            if(btn8.isHover())</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if(btn8.isHover())</span>
             {
-<span class="nc" id="L89">                return cards.getKartya(1,3);</span>
+<span class="nc" id="L94">                return cards.getKartya(1,3);</span>
             }
             else{
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            if(btn9.isHover())</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if(btn9.isHover())</span>
             {
-<span class="nc" id="L94">                return cards.getKartya(2,0);</span>
+<span class="nc" id="L99">                return cards.getKartya(2,0);</span>
             }
             else{
-<span class="nc bnc" id="L97" title="All 2 branches missed.">            if(btn10.isHover())</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">            if(btn10.isHover())</span>
             {
-<span class="nc" id="L99">                return cards.getKartya(2,1);</span>
+<span class="nc" id="L104">                return cards.getKartya(2,1);</span>
             }
             else{
-<span class="nc bnc" id="L102" title="All 2 branches missed.">            if(btn11.isHover())</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if(btn11.isHover())</span>
             {
-<span class="nc" id="L104">                return cards.getKartya(2,2);</span>
+<span class="nc" id="L109">                return cards.getKartya(2,2);</span>
             }
             else{
-<span class="nc bnc" id="L107" title="All 2 branches missed.">            if(btn12.isHover())</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">            if(btn12.isHover())</span>
             {
-<span class="nc" id="L109">                return cards.getKartya(2,3);</span>
+<span class="nc" id="L114">                return cards.getKartya(2,3);</span>
             }
             else{
-<span class="nc bnc" id="L112" title="All 2 branches missed.">            if(btn13.isHover())</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">            if(btn13.isHover())</span>
             {
-<span class="nc" id="L114">                return cards.getKartya(3,0);</span>
+<span class="nc" id="L119">                return cards.getKartya(3,0);</span>
             }
             else{
-<span class="nc bnc" id="L117" title="All 2 branches missed.">            if(btn14.isHover())</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if(btn14.isHover())</span>
             {
-<span class="nc" id="L119">                return cards.getKartya(3,1);</span>
+<span class="nc" id="L124">                return cards.getKartya(3,1);</span>
             }
             else{
-<span class="nc bnc" id="L122" title="All 2 branches missed.">            if(btn15.isHover())</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if(btn15.isHover())</span>
             {
-<span class="nc" id="L124">                return cards.getKartya(3,2);</span>
+<span class="nc" id="L129">                return cards.getKartya(3,2);</span>
             }
             else{
-<span class="nc bnc" id="L127" title="All 2 branches missed.">            if(btn16.isHover())</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            if(btn16.isHover())</span>
             {
-<span class="nc" id="L129">                return cards.getKartya(3,3);</span>
+<span class="nc" id="L134">                return cards.getKartya(3,3);</span>
             }
         }
         }
@@ -144,135 +149,147 @@ import org.slf4j.LoggerFactory;
         }
         }
         
-<span class="nc" id="L147">        return null;</span>
+<span class="nc" id="L152">        return null;</span>
     }
     
     public void onClick()
     {   
-<span class="nc" id="L152">        pane.getChildren().stream().forEach(e -&gt; e.setOnMouseClicked(b -&gt; change(b)));</span>
-<span class="nc" id="L153">    }</span>
+<span class="nc" id="L157">        pane.getChildren().stream().forEach(e -&gt; e.setOnMouseClicked(b -&gt; change(b)));</span>
+<span class="nc" id="L158">    }</span>
     
     boolean change;
     
-<span class="nc" id="L157">    Database database = Database.getPeldany();</span>
+    Database database;
     
     @FXML
     private void change(MouseEvent event)
     {
-<span class="nc" id="L162">        String temp = megnyomva();</span>
-<span class="nc" id="L163">        Button b = (Button) event.getSource();</span>
-<span class="nc" id="L164">        b.setStyle(&quot;-fx-background-image: url('/images/img1/&quot; + temp + &quot;.png')&quot;);</span>
-<span class="nc" id="L165">        String tempId = b.getId();</span>
+<span class="nc" id="L167">        String temp = megnyomva();</span>
+<span class="nc" id="L168">        Button b = (Button) event.getSource();</span>
+<span class="nc" id="L169">        b.setStyle(&quot;-fx-background-image: url('/images/img1/&quot; + temp + &quot;.png')&quot;);</span>
+        //Image img1 = new Image(getClass().getClassLoader().getResourceAsStream(&quot;/images/img1/&quot; + temp + &quot;.png&quot;));
+        //ImageView iv1 = new ImageView(img1);
+        //b.setStyle(&quot;/images/img1/&quot; + temp + &quot;.png&quot;);
+<span class="nc" id="L173">        String tempId = b.getId();</span>
         boolean tempCheck;
-<span class="nc" id="L167">        tempCheck = cards.getChecked(tempId);</span>
+<span class="nc" id="L175">        tempCheck = cards.getChecked(tempId);</span>
         
         try
         {      
-<span class="nc bnc" id="L171" title="All 4 branches missed.">            if(buttons.size() &lt; 2 &amp;&amp; tempCheck==true)</span>
+<span class="nc bnc" id="L179" title="All 4 branches missed.">            if(buttons.size() &lt; 2 &amp;&amp; tempCheck==true)</span>
             {
-<span class="nc" id="L173">                buttons.addLast(b);</span>
+<span class="nc" id="L181">                buttons.addLast(b);</span>
                 
-<span class="nc" id="L175">                cards.setCheck2(tempId, false);      </span>
+<span class="nc" id="L183">                cards.setCheck2(tempId, false);      </span>
             }
-<span class="nc bnc" id="L177" title="All 4 branches missed.">            else if(buttons.size() == 2 &amp;&amp; tempCheck==true)</span>
+<span class="nc bnc" id="L185" title="All 4 branches missed.">            else if(buttons.size() == 2 &amp;&amp; tempCheck==true)</span>
             {   
-<span class="nc" id="L179">                LOGGER.info(&quot;Checking cards: {} and {}&quot;, buttons.get(0).getId(), buttons.get(1).getId());</span>
-<span class="nc" id="L180">                change = cards.tesztel(buttons.get(0).getId(), buttons.get(1).getId());</span>
-<span class="nc bnc" id="L181" title="All 2 branches missed.">                if(!change)</span>
+<span class="nc" id="L187">                LOGGER.info(&quot;Checking cards: {} and {}&quot;, buttons.get(0).getId(), buttons.get(1).getId());</span>
+<span class="nc" id="L188">                change = cards.tesztel(buttons.get(0).getId(), buttons.get(1).getId());</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">                if(!change)</span>
                 {
-<span class="nc" id="L183">                    buttons.get(0).setStyle(&quot;-fx-background-image: url('/images/img1/fekete.png')&quot;);</span>
-<span class="nc" id="L184">                    buttons.get(1).setStyle(&quot;-fx-background-image: url('/images/img1/fekete.png')&quot;);</span>
-<span class="nc" id="L185">                    cards.setCheck2(buttons.get(0).getId(), true);</span>
-<span class="nc" id="L186">                    cards.setCheck2(buttons.get(1).getId(), true);  </span>
+<span class="nc" id="L191">                    buttons.get(0).setStyle(&quot;-fx-background-image: url('/images/img1/fekete.png')&quot;);</span>
+<span class="nc" id="L192">                    buttons.get(1).setStyle(&quot;-fx-background-image: url('/images/img1/fekete.png')&quot;);</span>
+<span class="nc" id="L193">                    cards.setCheck2(buttons.get(0).getId(), true);</span>
+<span class="nc" id="L194">                    cards.setCheck2(buttons.get(1).getId(), true);  </span>
                     
-<span class="nc" id="L188">                    cards.totalPairsCounter();</span>
-<span class="nc" id="L189">                    cards.scoreDec();</span>
+<span class="nc" id="L196">                    cards.totalPairsCounter();</span>
+<span class="nc" id="L197">                    cards.scoreDec();</span>
                 }
                 else
                 {
-<span class="nc" id="L193">                    buttons.get(0).setDisable(true);</span>
-<span class="nc" id="L194">                    buttons.get(1).setDisable(true);</span>
+<span class="nc" id="L201">                    buttons.get(0).setDisable(true);</span>
+<span class="nc" id="L202">                    buttons.get(1).setDisable(true);</span>
                     
-<span class="nc" id="L196">                    goals.add(cards.getChecked(buttons.get(0).getId()));</span>
-<span class="nc" id="L197">                    goals.add(cards.getChecked(buttons.get(1).getId()));</span>
+<span class="nc" id="L204">                    goals.add(cards.getChecked(buttons.get(0).getId()));</span>
+<span class="nc" id="L205">                    goals.add(cards.getChecked(buttons.get(1).getId()));</span>
                     
-<span class="nc" id="L199">                    cards.totalPairsCounter();</span>
-<span class="nc" id="L200">                    cards.correctPairsCounter();</span>
-<span class="nc" id="L201">                    cards.scoreInc();</span>
+<span class="nc" id="L207">                    cards.totalPairsCounter();</span>
+<span class="nc" id="L208">                    cards.correctPairsCounter();</span>
+<span class="nc" id="L209">                    cards.scoreInc();</span>
                 }
  
-<span class="nc" id="L204">                buttons.clear();</span>
+<span class="nc" id="L212">                buttons.clear();</span>
                 
-<span class="nc" id="L206">                buttons.addLast(b);</span>
+<span class="nc" id="L214">                buttons.addLast(b);</span>
                 
-<span class="nc" id="L208">                cards.setCheck2(tempId, false);</span>
+<span class="nc" id="L216">                cards.setCheck2(tempId, false);</span>
             }
             else
             {
-<span class="nc bnc" id="L212" title="All 4 branches missed.">                if(buttons.get(1) != null &amp;&amp; cards.isGoal(goals))</span>
+<span class="nc bnc" id="L220" title="All 4 branches missed.">                if(buttons.get(1) != null &amp;&amp; cards.isGoal(goals))</span>
                 {
-<span class="nc" id="L214">                    buttons.get(0).setDisable(true);</span>
-<span class="nc" id="L215">                    buttons.get(1).setDisable(true);</span>
-<span class="nc" id="L216">                    LOGGER.info(&quot;Vege...&quot;);</span>
-<span class="nc" id="L217">                    LOGGER.info(&quot;Total: &quot; + cards.getTotalPairs());</span>
-<span class="nc" id="L218">                    LOGGER.info(&quot;Accuracy: &quot; + cards.getAccuracy() + &quot; %&quot;);</span>
-<span class="nc" id="L219">                    LOGGER.info(&quot;Score: &quot; + cards.getScore());</span>
+<span class="nc" id="L222">                    buttons.get(0).setDisable(true);</span>
+<span class="nc" id="L223">                    buttons.get(1).setDisable(true);</span>
+<span class="nc" id="L224">                    LOGGER.info(&quot;Vege...&quot;);</span>
+<span class="nc" id="L225">                    LOGGER.info(&quot;Total: &quot; + cards.getTotalPairs());</span>
+<span class="nc" id="L226">                    LOGGER.info(&quot;Accuracy: &quot; + cards.getAccuracy() + &quot; %&quot;);</span>
+<span class="nc" id="L227">                    LOGGER.info(&quot;Score: &quot; + cards.getScore());</span>
                     
                     try
                     {
                         
                         //database.read();
-<span class="nc" id="L225">                        database.getCards(cards);</span>
-<span class="nc" id="L226">                        database.init();</span>
-<span class="nc" id="L227">                        database.concatenateXML();</span>
+<span class="nc" id="L233">                        database.getCards(cards);</span>
+<span class="nc" id="L234">                        database.init();</span>
+<span class="nc" id="L235">                        database.concatenateXML();</span>
             
-<span class="nc" id="L229">                    }catch(Exception e)</span>
+<span class="nc" id="L237">                    }catch(Exception e)</span>
                     {   
-<span class="nc" id="L231">                        LOGGER.error(e.getMessage());</span>
-<span class="nc" id="L232">                    }</span>
+<span class="nc" id="L239">                        LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L240">                    }</span>
                 }
             }
       
         }
-<span class="nc" id="L237">        catch(Exception e)</span>
+<span class="nc" id="L245">        catch(Exception e)</span>
         {
-<span class="nc" id="L239">            LOGGER.error(e.getMessage());</span>
-<span class="nc" id="L240">        }      </span>
-<span class="nc" id="L241">    }</span>
+<span class="nc" id="L247">            LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L248">        }</span>
+        
+<span class="nc" id="L250">    }</span>
     
     public void setImages()
     {
-<span class="nc" id="L245">        LOGGER.info(&quot;Loading the start position.&quot;);</span>
+<span class="nc" id="L254">        LOGGER.info(&quot;Loading the start position.&quot;);</span>
         
-<span class="nc" id="L247">        blacks.add(btn1);</span>
-<span class="nc" id="L248">        blacks.add(btn2);</span>
-<span class="nc" id="L249">        blacks.add(btn3);</span>
-<span class="nc" id="L250">        blacks.add(btn4);</span>
-<span class="nc" id="L251">        blacks.add(btn5);</span>
-<span class="nc" id="L252">        blacks.add(btn6);</span>
-<span class="nc" id="L253">        blacks.add(btn7);</span>
-<span class="nc" id="L254">        blacks.add(btn8);</span>
-<span class="nc" id="L255">        blacks.add(btn9);</span>
-<span class="nc" id="L256">        blacks.add(btn10);</span>
-<span class="nc" id="L257">        blacks.add(btn11);</span>
-<span class="nc" id="L258">        blacks.add(btn12);</span>
-<span class="nc" id="L259">        blacks.add(btn13);</span>
-<span class="nc" id="L260">        blacks.add(btn14);</span>
-<span class="nc" id="L261">        blacks.add(btn15);</span>
-<span class="nc" id="L262">        blacks.add(btn16);</span>
+<span class="nc" id="L256">        blacks.add(btn1);</span>
+<span class="nc" id="L257">        blacks.add(btn2);</span>
+<span class="nc" id="L258">        blacks.add(btn3);</span>
+<span class="nc" id="L259">        blacks.add(btn4);</span>
+<span class="nc" id="L260">        blacks.add(btn5);</span>
+<span class="nc" id="L261">        blacks.add(btn6);</span>
+<span class="nc" id="L262">        blacks.add(btn7);</span>
+<span class="nc" id="L263">        blacks.add(btn8);</span>
+<span class="nc" id="L264">        blacks.add(btn9);</span>
+<span class="nc" id="L265">        blacks.add(btn10);</span>
+<span class="nc" id="L266">        blacks.add(btn11);</span>
+<span class="nc" id="L267">        blacks.add(btn12);</span>
+<span class="nc" id="L268">        blacks.add(btn13);</span>
+<span class="nc" id="L269">        blacks.add(btn14);</span>
+<span class="nc" id="L270">        blacks.add(btn15);</span>
+<span class="nc" id="L271">        blacks.add(btn16);</span>
         
-<span class="nc bnc" id="L264" title="All 2 branches missed.">        for(Button blackb : blacks)</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">        for(Button blackb : blacks)</span>
         {
-<span class="nc" id="L266">            blackb.setStyle(&quot;-fx-background-image: url('/images/img1/fekete.png')&quot;);</span>
-<span class="nc" id="L267">        }</span>
+<span class="nc" id="L275">            blackb.setStyle(&quot;-fx-background-image: url('/images/img1/fekete.png')&quot;);</span>
+<span class="nc" id="L276">        }</span>
+        
 
-<span class="nc" id="L269">    }</span>
+<span class="nc" id="L279">    }</span>
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Database database = Database.getPeldany();
-        //database.read();
-        //label.setText(Integer.toString(cards.getMax()));
-<span class="nc" id="L276">    }    </span>
+<span class="nc" id="L284">        onClick();</span>
+<span class="nc" id="L285">        setImages();</span>
+        
+<span class="nc" id="L287">        cards = Cards.getPeldany();</span>
+<span class="nc" id="L288">        database = Database.getPeldany();</span>
+        
+<span class="nc" id="L290">        database.read();</span>
+<span class="nc" id="L291">        label.setText(Integer.toString(cards.getMax()));</span>
+<span class="nc" id="L292">    }</span>
+        
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

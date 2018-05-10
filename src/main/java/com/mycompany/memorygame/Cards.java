@@ -39,7 +39,7 @@ public class Cards {
             }
         }
 
-        public Cards()
+        private Cards()
         {
             init();
 
@@ -59,6 +59,15 @@ public class Cards {
             this.accuracy = 0;
             this.score = 0;
                                 
+        }
+        
+        private static Cards peldany1;
+    
+        public static Cards getPeldany()
+        {
+            if(peldany1 == null)
+                peldany1 = new Cards();
+            return peldany1;
         }
         
         public String getKartya(int i, int j)
@@ -249,14 +258,14 @@ public class Cards {
             return this.score +5;
         }
         
-        int max = 0;
+        private int max = 0;
         public void maxScore(LinkedList<Integer> goals)
         {
             
-            for(int i=0; i<goals.size(); i++)
+            for(int j=0; j<goals.size(); j++)
             {
-                if(goals.get(i) > max)
-                    max = goals.get(i);
+                if(goals.get(j) > max)
+                    max = goals.get(j);
                     
             }
         }
@@ -271,5 +280,12 @@ public class Cards {
             return getScore() > max;
                 
         }
+
+    @Override
+    public String toString() {
+        return "Cards{" + "totalPairs=" + totalPairs + ", correctPairs=" + correctPairs + ", accuracy=" + accuracy + ", score=" + score + ", kartya=" + kartya + ", colors=" + colors + ", i=" + i + ", max=" + max + '}';
+    }
+        
+        
         
 }

@@ -21,7 +21,7 @@ public class MainApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/SignIn.fxml"));
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         
         
         
