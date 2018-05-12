@@ -5,6 +5,28 @@
  */
 package com.mycompany.memorygame;
 
+/*-
+ * #%L
+ * MemoryGame
+ * %%
+ * Copyright (C) 2018 Faculty of Informatics, University of Debrecen
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -68,7 +90,7 @@ public class Database{
     
     Cards c ;
     
-    Database()
+    private Database()
     {
         this.c = Cards.getPeldany();
     }
@@ -115,17 +137,19 @@ public class Database{
         
         }catch(TransformerConfigurationException | ParserConfigurationException e)
         {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
             
         }catch (TransformerException e) 
         {
-            System.out.println(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
     }
     
     public void concatenateXML()
     {
+        //File file1 = new File("/main/resources/xml/tempDatas.xml");
         File file1 = new File("target/classes/xml/tempDatas.xml");
+        
         File file2 = new File("target/classes/xml/datas.xml");
         //try
        // {
@@ -192,7 +216,7 @@ public class Database{
         return null;
     }
     
-    private static void write(Document doc)
+    private void write(Document doc)
     {
         try
         {
@@ -220,10 +244,11 @@ public class Database{
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             File score = new File("target/classes/xml/datas.xml");
+            //File score = new File(getClass().getResource("/xml/datas.xml").getFile());
             Document doc = db.parse(score);
             doc.getDocumentElement().normalize();
             NodeList n = doc.getElementsByTagName("player");
-            System.out.println(n.getLength());
+            LOGGER.info("Quantity of points: " + n.getLength());
             for( int i=0; i<n.getLength(); i++)
             {
                 Element e = (Element) n.item(i);
