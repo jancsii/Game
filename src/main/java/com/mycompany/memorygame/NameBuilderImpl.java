@@ -28,22 +28,36 @@ package com.mycompany.memorygame;
  */
 
 /**
- *
- * @author jancsi
+ * Contains methods which are for set and get the player's name.
  */
 public class NameBuilderImpl implements NameBuilder{
+    
     private Name n;
-
+    
+    /**
+    * Constructor of {@link NameBuilderImpl}
+    */
     public NameBuilderImpl() {
         n = new Name();
     }
     
+    /**
+    * Sets the player's name.
+    *
+    * @param namefield is the name of the player
+    * @return a {@link NameBuilder} object
+    */
     @Override
     public NameBuilder setNamefield(String namefield) {
         n.setNamefield(namefield);
         return this;
     }
-
+    
+    /**
+    * Responsible for {@link NameBuilder} execution.
+    * 
+    * @return a {@link Name} object
+    */
     @Override
     public Name build() {
         return n;

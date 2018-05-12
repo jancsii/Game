@@ -31,11 +31,19 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+* MainApp class starting the JavaFx application.
+*/
 public class MainApp extends Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainApp.class);
     
+    /**
+    * This method sets the starting position of the game, which is the entry scene.
+    * 
+    * @param stage is the starting condition
+    * @throws java.lang.Exception when can't find the fxml or css file 
+    */
     @Override
     public void start(Stage stage) throws Exception {
         LOGGER.trace("Application started!");
@@ -56,11 +64,8 @@ public class MainApp extends Application {
     }
 
     /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
+     * This method calls {@code launch(args)} and then start the JavaFx application.
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {

@@ -22,8 +22,6 @@ package com.mycompany.memorygame;
  * #L%
  */
 
-
-import com.sun.javafx.css.Style;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,20 +32,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+* FXML Controller class. 
+*/
 public class PlayingController implements Initializable {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(PlayingController.class);
 
-    
     Cards cards; 
     
     LinkedList<Button> buttons = new LinkedList<>();
@@ -55,6 +52,10 @@ public class PlayingController implements Initializable {
     ArrayList<Button> blacks = new ArrayList<>();
     
     LinkedList<Boolean> goals = new LinkedList<>();
+    
+    boolean change;
+    
+    Database database;
     
     int j = 0;
     
@@ -73,7 +74,12 @@ public class PlayingController implements Initializable {
         Stage stage = (Stage) label.getScene().getWindow();
         stage.close();
     }
-       
+    
+    /**
+    * To button click returns which {@link Card} corresponds to that button.
+    * 
+    * @return {@link Card}'s color
+    */
     public String megnyomva()
     {
         if(btn1.isHover())
@@ -174,14 +180,13 @@ public class PlayingController implements Initializable {
         return null;
     }
     
+    /**
+    * Method to all button that we can check the {@link Card}s.
+    */
     public void onClick()
     {   
         pane.getChildren().stream().forEach(e -> e.setOnMouseClicked(b -> change(b)));
     }
-    
-    boolean change;
-    
-    Database database;
     
     @FXML
     private void change(MouseEvent event)
@@ -279,6 +284,9 @@ public class PlayingController implements Initializable {
         
     }
     
+    /**
+    * At the start of the game sets all button's image to starting image.
+    */
     public void setImages()
     {
         LOGGER.debug("Loading the start position.");

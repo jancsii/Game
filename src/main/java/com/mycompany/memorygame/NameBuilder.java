@@ -28,11 +28,22 @@ package com.mycompany.memorygame;
  */
 
 /**
- *
- * @author jancsi
+ * Abstract interface to create object.
  */
 public interface NameBuilder {
+    
+    /**
+    * Sets the player's name.
+    *
+    * @param namefield is the name of the player
+    * @return a {@link NameBuilder} object
+    */
     NameBuilder setNamefield(final String namefield);
     
-    Name build ();
+    /**
+    * Responsible for {@link NameBuilder} execution.
+    * 
+    * @return a {@link Name} object
+    */
+    Name build();
 }
