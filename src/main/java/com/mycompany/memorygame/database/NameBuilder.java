@@ -26,24 +26,23 @@ package com.mycompany.memorygame.database;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-
 /**
  * Abstract interface to create object.
  */
 public interface NameBuilder {
-    
+
     /**
-    * Sets the player's name.
-    *
-    * @param namefield is the name of the player
-    * @return a {@link NameBuilder} object
-    */
+     * Sets the player's name.
+     *
+     * @param namefield is the name of the player
+     * @return a {@link NameBuilder} object
+     */
     NameBuilder setNamefield(final String namefield);
-    
+
     /**
-    * Responsible for {@link NameBuilder} execution.
-    * 
-    * @return a {@link Name} object
-    */
+     * Responsible for {@link NameBuilder} execution.
+     *
+     * @return a {@link Name} object
+     */
     Name build();
 }

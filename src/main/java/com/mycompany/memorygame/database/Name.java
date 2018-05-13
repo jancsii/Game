@@ -26,42 +26,39 @@ package com.mycompany.memorygame.database;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-
 /**
  * Contains the login name of the player.
  */
 public class Name {
+
     private String namefield;
-    
+
     /**
-    * Constructor of Name class.
-    */
-    public Name()
-    {
-        
+     * Constructor of Name class.
+     */
+    public Name() {
+
     }
 
     //public Name(String namefield) {
     //    this.namefield = namefield;
     //}
-    
     /**
-    * Returns the player's name.
-    *
-    * @return name of the player
-    */
+     * Returns the player's name.
+     *
+     * @return name of the player
+     */
     public String getNamefield() {
         return namefield;
     }
-    
+
     /**
-    * Sets the player's name.
-    *
-    * @param namefield is the name we want to set to player
-    */
+     * Sets the player's name.
+     *
+     * @param namefield is the name we want to set to player
+     */
     public void setNamefield(String namefield) {
         this.namefield = namefield;
     }
-    
-    
+
 }

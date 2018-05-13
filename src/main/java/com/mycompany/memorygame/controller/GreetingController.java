@@ -21,7 +21,6 @@ package com.mycompany.memorygame.controller;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-
 import com.mycompany.memorygame.database.Database;
 import com.mycompany.memorygame.database.Name;
 import com.mycompany.memorygame.database.NameBuilder;
@@ -41,7 +40,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class GreetingController implements Initializable {
-    
+
     @FXML
     private Label labelName;
     @FXML
@@ -50,51 +49,46 @@ public class GreetingController implements Initializable {
     private TextField textfieldName;
     @FXML
     private Button buttonNext;
-    
+
     public Database db = Database.getPeldany();
-    
-    public Name construct()
-    {
+
+    public Name construct() {
         NameBuilder builder = new NameBuilderImpl();
         return builder.setNamefield(textfieldName.getText()).build();
     }
-    
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Stage stage = (Stage) labelName.getScene().getWindow();
         //Stage stage = new Stage(StageStyle.DECORATED);
         db.setData(construct());
 
-        try
-        {
-        
-        FXMLLoader f1 = new FXMLLoader((getClass().getResource("/fxml/Play.fxml")));
-        Parent root = f1.load();
-        // Parent root = FXMLLoader.load(getClass().getResource("/fxml/Play.fxml"));
-       
-     //   f1.<PlayingController>getController().setImages();
-       // f1.<PlayingController>getController().onClick();
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
-        
-        stage.setTitle("Memory Game");
-        stage.setScene(scene);
-        stage.show();
-        
-       // }
-        //
-      //  catch(IOException e)
-        //{
-       //     System.out.println("Error :"+e.getMessage());
+        try {
 
-       // }
-        
-    }   catch (IOException ex) {
+            FXMLLoader f1 = new FXMLLoader((getClass().getResource("/fxml/Play.fxml")));
+            Parent root = f1.load();
+            // Parent root = FXMLLoader.load(getClass().getResource("/fxml/Play.fxml"));
+
+            //   f1.<PlayingController>getController().setImages();
+            // f1.<PlayingController>getController().onClick();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
+
+            stage.setTitle("Memory Game");
+            stage.setScene(scene);
+            stage.show();
+
+            // }
+            //
+            //  catch(IOException e)
+            //{
+            //     System.out.println("Error :"+e.getMessage());
+            // }
+        } catch (IOException ex) {
             Logger.getLogger(GreetingController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /*@FXML
     private void handleButtonAction(ActionEvent event){
         try {
@@ -110,31 +104,25 @@ public class GreetingController implements Initializable {
             Logger.getLogger(GreetingController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }*/
-    
     @FXML
-    private void goOn(ActionEvent event)
-    {
-        if(!"".equals(textfieldName.getText()))
-        {
+    private void goOn(ActionEvent event) {
+        if (!"".equals(textfieldName.getText())) {
             labelGreeting.setMaxWidth(240);
             labelGreeting.setWrapText(true);
             labelGreeting.setText("Welcome " + textfieldName.getText() + "!\nTo start playing, click the button go.");
-            
+
             buttonNext.setVisible(true);
- 
-        }
-        else
-        {
+
+        } else {
             labelGreeting.setMaxWidth(240);
             labelGreeting.setWrapText(true);
             labelGreeting.setText("Enter your name!");
         }
-        
-        
+
     }
-   
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 }

@@ -198,41 +198,30 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin> 
-                <groupId>org.jacoco</groupId> 
-                <artifactId>jacoco-maven-plugin</artifactId> 
-                <version>0.8.1</version> 
+            <plugin>
+                <groupId>org.openclover</groupId>
+                <artifactId>clover-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <configuration> 
+                    <targetPercentage>50%</targetPercentage> 
+                </configuration> 
                 <executions> 
                     <execution> 
-                        <id>prepare-agent</id> 
+                        <id>verify</id> 
+                        <phase>verify</phase> 
                         <goals> 
-                            <goal>prepare-agent</goal> 
+                            <goal>instrument</goal> 
+                            <goal>check</goal> 
                         </goals> 
                     </execution> 
                     <execution> 
-                        <id>report</id> 
-                        <phase>prepare-package</phase> 
+                        <id>pre-site</id> 
+                        <phase>pre-site</phase> 
                         <goals> 
-                            <goal>report</goal> 
+                            <goal>instrument</goal> 
                         </goals> 
-                    </execution> 
-                    <execution> 
-                        <id>post-unit-test</id> 
-                        <phase>test</phase> 
-                        <goals> 
-                            <goal>report</goal> 
-                        </goals> 
-                        <configuration> 
-                            <dataFile>target/jacoco.exec</dataFile> 
-                            <outputDirectory>target/jacoco</outputDirectory> 
-                        </configuration> 
                     </execution> 
                 </executions> 
-                <configuration> 
-                    <systemPropertyVariables> 
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile> 
-                    </systemPropertyVariables> 
-                </configuration> 
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -271,12 +260,12 @@
                 <version>2.5</version>
             </plugin>
             <plugin>
-                <groupId>org.jacoco</groupId> 
-                <artifactId>jacoco-maven-plugin</artifactId> 
-                <version>0.8.1</version> 
+                <groupId>org.openclover</groupId>
+                <artifactId>clover-maven-plugin</artifactId>
+                <version>4.2.0</version>
                 <configuration>
                     <generatePdf>true</generatePdf>
-                    <generateXml>true</generateXml>
+                    <generateHtml>true</generateHtml>
                 </configuration>
             </plugin>
             <plugin>

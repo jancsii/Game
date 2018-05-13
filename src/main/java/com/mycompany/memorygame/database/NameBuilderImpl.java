@@ -26,41 +26,40 @@ package com.mycompany.memorygame.database;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-
 /**
  * Contains methods which are for set and get the player's name.
  */
-public class NameBuilderImpl implements NameBuilder{
-    
+public class NameBuilderImpl implements NameBuilder {
+
     private Name n;
-    
+
     /**
-    * Constructor of {@link NameBuilderImpl}
-    */
+     * Constructor of {@link NameBuilderImpl}
+     */
     public NameBuilderImpl() {
         n = new Name();
     }
-    
+
     /**
-    * Sets the player's name.
-    *
-    * @param namefield is the name of the player
-    * @return a {@link NameBuilder} object
-    */
+     * Sets the player's name.
+     *
+     * @param namefield is the name of the player
+     * @return a {@link NameBuilder} object
+     */
     @Override
     public NameBuilder setNamefield(String namefield) {
         n.setNamefield(namefield);
         return this;
     }
-    
+
     /**
-    * Responsible for {@link NameBuilder} execution.
-    * 
-    * @return a {@link Name} object
-    */
+     * Responsible for {@link NameBuilder} execution.
+     *
+     * @return a {@link Name} object
+     */
     @Override
     public Name build() {
         return n;
     }
-    
+
 }

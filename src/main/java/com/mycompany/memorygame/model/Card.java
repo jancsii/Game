@@ -26,53 +26,54 @@ package com.mycompany.memorygame.model;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
-
 /**
  *
  * @author jancsi
  */
 public class Card {
-    
+
     private String color;
     private boolean check;
-    
+
     /**
-    * Creates a {@link Card} object with given parameters, which will be a card in the game.
-    * 
-    * @param color which is random and that's will be the {@link Card}'s color
-    * @param check at the start will be true, because you can turn the {@link Card} 
-    */
-    public Card(String color, boolean check)
-    {
+     * Creates a {@link Card} object with given parameters, which will be a card
+     * in the game.
+     *
+     * @param color which is random and that's will be the {@link Card}'s color
+     * @param check at the start will be true, because you can turn the
+     * {@link Card}
+     */
+    public Card(String color, boolean check) {
         this.color = color;
         this.check = check;
     }
-    
+
     /**
-    * Returns the color of a {@link Card} object.
-    * 
-    * @return the object's color
-    */
+     * Returns the color of a {@link Card} object.
+     *
+     * @return the object's color
+     */
     public String getColor() {
         return color;
     }
-    
+
     /**
-    * Returns that if a card is checked or not.
-    * 
-    * @return the {@link Card} is upside-down
-    */
+     * Returns that if a card is checked or not.
+     *
+     * @return the {@link Card} is upside-down
+     */
     public boolean isCheck() {
         return check;
     }
 
     /**
-    * Set the object's check field to the given parameter.
-    * 
-    * @param check true if we can check the {@link Card} and false if we can't because already checked
-    */
+     * Set the object's check field to the given parameter.
+     *
+     * @param check true if we can check the {@link Card} and false if we can't
+     * because already checked
+     */
     public void setCheck(boolean check) {
         this.check = check;
     }
-    
+
 }
