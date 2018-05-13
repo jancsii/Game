@@ -24,6 +24,7 @@ package com.mycompany.memorygame.controller;
 import com.mycompany.memorygame.database.Database;
 import com.mycompany.memorygame.model.Cards;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -41,6 +42,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * FXML Controller class.
+ * 
+ * <p>
+ * Control button click actions.
+ * Connects UI and model.
+ * </p>
  */
 public class PlayingController implements Initializable {
 
@@ -61,7 +67,7 @@ public class PlayingController implements Initializable {
     int j = 0;
 
     @FXML
-    private Label label;
+    private Label label, labelFinal;
 
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16;
@@ -81,54 +87,54 @@ public class PlayingController implements Initializable {
      *
      * @return {@link com.mycompany.memorygame.model Card}'s color
      */
-    public String megnyomva() {
+    public String pressed() {
         if (btn1.isHover()) {
-            return cards.getKartya(0, 0);
+            return cards.getCardC(0, 0);
         } else {
             if (btn2.isHover()) {
-                return cards.getKartya(0, 1);
+                return cards.getCardC(0, 1);
             } else {
                 if (btn3.isHover()) {
-                    return cards.getKartya(0, 2);
+                    return cards.getCardC(0, 2);
                 } else {
                     if (btn4.isHover()) {
-                        return cards.getKartya(0, 3);
+                        return cards.getCardC(0, 3);
                     } else {
                         if (btn5.isHover()) {
-                            return cards.getKartya(1, 0);
+                            return cards.getCardC(1, 0);
                         } else {
                             if (btn6.isHover()) {
-                                return cards.getKartya(1, 1);
+                                return cards.getCardC(1, 1);
                             } else {
                                 if (btn7.isHover()) {
-                                    return cards.getKartya(1, 2);
+                                    return cards.getCardC(1, 2);
                                 } else {
                                     if (btn8.isHover()) {
-                                        return cards.getKartya(1, 3);
+                                        return cards.getCardC(1, 3);
                                     } else {
                                         if (btn9.isHover()) {
-                                            return cards.getKartya(2, 0);
+                                            return cards.getCardC(2, 0);
                                         } else {
                                             if (btn10.isHover()) {
-                                                return cards.getKartya(2, 1);
+                                                return cards.getCardC(2, 1);
                                             } else {
                                                 if (btn11.isHover()) {
-                                                    return cards.getKartya(2, 2);
+                                                    return cards.getCardC(2, 2);
                                                 } else {
                                                     if (btn12.isHover()) {
-                                                        return cards.getKartya(2, 3);
+                                                        return cards.getCardC(2, 3);
                                                     } else {
                                                         if (btn13.isHover()) {
-                                                            return cards.getKartya(3, 0);
+                                                            return cards.getCardC(3, 0);
                                                         } else {
                                                             if (btn14.isHover()) {
-                                                                return cards.getKartya(3, 1);
+                                                                return cards.getCardC(3, 1);
                                                             } else {
                                                                 if (btn15.isHover()) {
-                                                                    return cards.getKartya(3, 2);
+                                                                    return cards.getCardC(3, 2);
                                                                 } else {
                                                                     if (btn16.isHover()) {
-                                                                        return cards.getKartya(3, 3);
+                                                                        return cards.getCardC(3, 3);
                                                                     }
                                                                 }
                                                             }
@@ -157,14 +163,14 @@ public class PlayingController implements Initializable {
         pane.getChildren().stream().forEach(e -> e.setOnMouseClicked(b -> change(b)));
     }
 
+    /**
+    * This method control the button click actions, and calls the methods from model class.
+    */
     @FXML
     private void change(MouseEvent event) {
-        String temp = megnyomva();
+        String temp = pressed();
         Button b = (Button) event.getSource();
         b.setStyle("-fx-background-image: url('/images/img1/" + temp + ".png')");
-        //Image img1 = new Image(getClass().getClassLoader().getResourceAsStream("/images/img1/" + temp + ".png"));
-        //ImageView iv1 = new ImageView(img1);
-        //b.setStyle("/images/img1/" + temp + ".png");
         String tempId = b.getId();
         boolean tempCheck;
         tempCheck = cards.getChecked(tempId);
@@ -176,10 +182,10 @@ public class PlayingController implements Initializable {
                 cards.setCheck2(tempId, false);
             } else if (buttons.size() == 2 && tempCheck == true) {
                 LOGGER.info("Checking cards: {} and {}", buttons.get(0).getId(), buttons.get(1).getId());
-                change = cards.tesztel(buttons.get(0).getId(), buttons.get(1).getId());
+                change = cards.testing(buttons.get(0).getId(), buttons.get(1).getId());
                 if (!change) {
-                    buttons.get(0).setStyle("-fx-background-image: url('/images/img1/fekete.png')");
-                    buttons.get(1).setStyle("-fx-background-image: url('/images/img1/fekete.png')");
+                    buttons.get(0).setStyle("-fx-base: black");
+                    buttons.get(1).setStyle("-fx-base: black");
                     cards.setCheck2(buttons.get(0).getId(), true);
                     cards.setCheck2(buttons.get(1).getId(), true);
 
@@ -206,42 +212,37 @@ public class PlayingController implements Initializable {
                 if (buttons.get(1) != null && cards.isGoal(goals)) {
                     buttons.get(0).setDisable(true);
                     buttons.get(1).setDisable(true);
-                    LOGGER.debug("Vege...");
+                    
                     LOGGER.info("Total: " + cards.getTotalPairs());
                     LOGGER.info("Accuracy: " + cards.getAccuracy() + " %");
                     LOGGER.info("Score: " + cards.getScore());
+                    LOGGER.debug("End...");
 
                     if (cards.newMaxScore()) {
-                        label.setText("Rekord: " + String.valueOf(cards.getScore()) + " pont");
-                        LOGGER.info("Congratulations, New Record: " + cards.getScore());
+                        label.setText("Record: " + String.valueOf(cards.getScore()) + " points");
+                        labelFinal.setText("Congratulations, New Record: " + cards.getScore());
+                        LOGGER.info("New Record: " + cards.getScore());
                     } else {
-                        LOGGER.info("Good job, your score: " + cards.getScore());
+                        labelFinal.setText("Good job, your score: " + cards.getScore());
+                        LOGGER.info("Player's score: " + cards.getScore());
                     }
-
-                    //try
-                    //{
-                    //database.read();
                     database.getCards(cards);
                     database.init();
-                    //database.concatenateXML();
-
-                    //}catch(IOException e)
-                    //{   
-                    //  LOGGER.error(e.getMessage());
-                    //}
                 }
             }
 
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.warn(e.getMessage());
         }
 
     }
 
     /**
-     * At the start of the game sets all button's image to starting image.
+     * At the start of the game sets all buttons image to starting image.
+     * 
+     * @throws java.net.MalformedURLException when file malformed
      */
-    public void setImages() {
+    public void setImages() throws MalformedURLException {
         LOGGER.debug("Loading the start position.");
 
         blacks.add(btn1);
@@ -262,22 +263,26 @@ public class PlayingController implements Initializable {
         blacks.add(btn16);
 
         for (Button blackb : blacks) {
-            blackb.setStyle("-fx-background-image: url('/images/img1/fekete.png')");
+            blackb.setStyle("-fx-base: black");
         }
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Database database = Database.getPeldany();
-        onClick();
-        setImages();
 
-        cards = Cards.getPeldany();
-        database = Database.getPeldany();
-        //System.out.println(database);
+        onClick();
+        try {
+            setImages();
+        } catch (MalformedURLException e) {
+            LOGGER.error(e.getMessage());
+        }
+
+        cards = Cards.getInstanceCards();
+        database = Database.getInstance();
+
         database.read();
-        label.setText("Rekord: " + String.valueOf(cards.getMax()) + " pont");
+        label.setText("Record: " + String.valueOf(cards.getMax()) + " points");
     }
 
 }

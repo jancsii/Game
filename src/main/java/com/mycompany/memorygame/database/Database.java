@@ -30,7 +30,6 @@ import com.mycompany.memorygame.model.Cards;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.logging.Level;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -69,7 +68,7 @@ public class Database {
 
     private static Element root;
 
-    private static Database peldany;
+    private static Database instanceDB;
 
     /**
      * We control the Database class to have only one object.
@@ -81,11 +80,11 @@ public class Database {
      *
      * @return a {@link Database} object
      */
-    public static Database getPeldany() {
-        if (peldany == null) {
-            peldany = new Database();
+    public static Database getInstance() {
+        if (instanceDB == null) {
+            instanceDB = new Database();
         }
-        return peldany;
+        return instanceDB;
     }
 
     /**
@@ -110,7 +109,7 @@ public class Database {
      * Constructor of the class Database.
      */
     private Database() {
-        this.c = Cards.getPeldany();
+        this.c = Cards.getInstanceCards();
     }
 
     /**
@@ -180,10 +179,8 @@ public class Database {
         } catch (TransformerConfigurationException | ParserConfigurationException | IOException e) {
             LOGGER.error(e.getMessage());
 
-        } catch (TransformerException e) {
+        } catch (TransformerException | SAXException e) {
             LOGGER.error(e.getMessage());
-        } catch (SAXException ex) {
-            java.util.logging.Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -207,9 +204,7 @@ public class Database {
                 LOGGER.info("Quantity of points: " + n.getLength());
                 for (int i = 0; i < n.getLength(); i++) {
                     Element e = (Element) n.item(i);
-                    LOGGER.info(e.getElementsByTagName("score").item(0).getTextContent());
                     scores.add(Integer.parseInt(e.getElementsByTagName("score").item(0).getTextContent()));
-
                 }
                 c.maxScore(scores);
                 LOGGER.info("Reading in...");

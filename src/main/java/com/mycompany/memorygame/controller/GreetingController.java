@@ -50,7 +50,7 @@ public class GreetingController implements Initializable {
     @FXML
     private Button buttonNext;
 
-    public Database db = Database.getPeldany();
+    public Database db = Database.getInstance();
 
     public Name construct() {
         NameBuilder builder = new NameBuilderImpl();
@@ -60,17 +60,14 @@ public class GreetingController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Stage stage = (Stage) labelName.getScene().getWindow();
-        //Stage stage = new Stage(StageStyle.DECORATED);
+        
         db.setData(construct());
 
         try {
 
             FXMLLoader f1 = new FXMLLoader((getClass().getResource("/fxml/Play.fxml")));
             Parent root = f1.load();
-            // Parent root = FXMLLoader.load(getClass().getResource("/fxml/Play.fxml"));
-
-            //   f1.<PlayingController>getController().setImages();
-            // f1.<PlayingController>getController().onClick();
+            
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 
@@ -78,32 +75,11 @@ public class GreetingController implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-            // }
-            //
-            //  catch(IOException e)
-            //{
-            //     System.out.println("Error :"+e.getMessage());
-            // }
         } catch (IOException ex) {
             Logger.getLogger(GreetingController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /*@FXML
-    private void handleButtonAction(ActionEvent event){
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/Play.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage= new Stage(StageStyle.DECORATED);
-            stage.setScene(scene);
-            stage.setTitle("Kezdőlap");
-            stage.setResizable(false);
-            stage.show();
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-        } catch (IOException ex) {
-            Logger.getLogger(GreetingController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
     @FXML
     private void goOn(ActionEvent event) {
         if (!"".equals(textfieldName.getText())) {

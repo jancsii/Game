@@ -23,6 +23,12 @@
         </developer>
     </developers>
     
+    <scm>
+        <connection>scm:git:https://github.com/jancsii/Game.git</connection>
+        <developerConnection>scm:git:https://github.com/jancsii/Game.git</developerConnection>
+        <url>https://github.com/jancsii/Game</url>
+    </scm>
+    
     <licenses>
         <license>
             <name>GNU General Public License (GPL) version 3.0</name>
@@ -123,7 +129,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>${exec.mainClass}</mainClass>
+                                    <mainClass>${mainClass}</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -222,6 +228,16 @@
                         </goals> 
                     </execution> 
                 </executions> 
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.16</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

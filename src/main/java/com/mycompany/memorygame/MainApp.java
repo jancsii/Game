@@ -42,7 +42,7 @@ public class MainApp extends Application {
      * scene.
      *
      * @param stage is the starting condition
-     * @throws java.lang.Exception when can't find the fxml or css file
+     * @throws java.lang.Exception when can't find the FXML or CSS file
      */
     @Override
     public void start(Stage stage) throws Exception {

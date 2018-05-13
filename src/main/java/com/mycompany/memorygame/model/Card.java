@@ -28,7 +28,7 @@ package com.mycompany.memorygame.model;
  */
 /**
  *
- * @author jancsi
+ * {@link Card} class creates an object which representing a card in the game.
  */
 public class Card {
 

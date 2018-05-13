@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
  */
 public class CardsTest {
 
-    Cards cards = Cards.getPeldany();
+    Cards cards = Cards.getInstanceCards();
 
     LinkedList<Boolean> goal = new LinkedList<>();
 
@@ -44,38 +44,38 @@ public class CardsTest {
 
     private int tempMax = 0;
 
-    public String testgetSzin(String id) {
+    public String testgetCardColor(String id) {
         switch (id) {
             case "btn1":
-                return "sarga";
+                return "yellow";
             case "btn2":
-                return "piros";
+                return "red";
             case "btn3":
-                return "szurke";
+                return "blue";
             case "btn4":
-                return "zold";
+                return "green";
             case "btn5":
-                return "narancs";
+                return "orange";
             case "btn6":
-                return "turkiz";
+                return "turquoise";
             case "btn7":
                 return "pink";
             case "btn8":
-                return "lila";
+                return "purple";
             case "btn9":
-                return "zold";
+                return "green";
             case "btn10":
-                return "narancs";
+                return "orange";
             case "btn11":
-                return "sarga";
+                return "yellow";
             case "btn12":
                 return "pink";
             case "btn13":
-                return "turkiz";
+                return "turquoise";
             case "btn14":
-                return "szurke";
+                return "blue";
             case "btn15":
-                return "lila";
+                return "purple";
             case "btn16":
                 return "pink";
         }
@@ -83,9 +83,9 @@ public class CardsTest {
     }
 
     @Test
-    public void testtesztel() {
-        assertEquals(testgetSzin("btn5"), testgetSzin("btn10"));
-        assertEquals(testgetSzin("btn15"), testgetSzin("btn8"));
+    public void testtesting() {
+        assertEquals(testgetCardColor("btn5"), testgetCardColor("btn10"));
+        assertEquals(testgetCardColor("btn15"), testgetCardColor("btn8"));
     }
 
     public void load() {
@@ -124,26 +124,26 @@ public class CardsTest {
     }
 
     @Test
-    public void testgetKartya() {
-        assertEquals(cards.kartya[2][3].getColor(), cards.getKartya(2, 3));
+    public void testgetCardC() {
+        assertEquals(cards.playingCards[2][3].getColor(), cards.getCardC(2, 3));
     }
 
     @Test
-    public void testgetSzin() {
-        assertEquals(cards.kartya[0][0].getColor(), cards.getSzin("btn1"));
-        assertEquals(cards.kartya[1][2].getColor(), cards.getSzin("btn7"));
+    public void testgetColor() {
+        assertEquals(cards.playingCards[0][0].getColor(), cards.getCardColor("btn1"));
+        assertEquals(cards.playingCards[1][2].getColor(), cards.getCardColor("btn7"));
     }
 
     @Test
     public void testgetChecked() {
-        assertEquals(cards.kartya[1][0].isCheck(), cards.getChecked("btn5"));
-        assertEquals(cards.kartya[3][0].isCheck(), cards.getChecked("btn13"));
+        assertEquals(cards.playingCards[1][0].isCheck(), cards.getChecked("btn5"));
+        assertEquals(cards.playingCards[3][0].isCheck(), cards.getChecked("btn13"));
     }
 
     @Test
     public void testgetCard() {
-        assertEquals(cards.kartya[0][3], cards.getCard("btn4"));
-        assertEquals(cards.kartya[2][2], cards.getCard("btn11"));
+        assertEquals(cards.playingCards[0][3], cards.getCard("btn4"));
+        assertEquals(cards.playingCards[2][2], cards.getCard("btn11"));
     }
 
 }

@@ -31,8 +31,13 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- *
- * @author jancsi
+ * {@link Cards} class creates all the {@link Card}s and makes to be randomized the {@link Card}s.
+ * 
+ * <p>
+ * In this class are the methods which manage the game.
+ * The calculations are done here.
+ * </p>
+ * 
  */
 public class Cards {
 
@@ -59,7 +64,7 @@ public class Cards {
     /**
      * A 4x4 array, which elements are {@link Card}s.
      */
-    public Card kartya[][] = new Card[4][4];
+    public Card playingCards[][] = new Card[4][4];
 
     /**
      * A list which contains colors.
@@ -76,13 +81,13 @@ public class Cards {
      */
     public final void init() {
         for (int f = 0; f < 2; f++) {
-            colors.add("kek");
-            colors.add("piros");
-            colors.add("sarga");
-            colors.add("lila");
-            colors.add("turkiz");
-            colors.add("narancs");
-            colors.add("zold");
+            colors.add("blue");
+            colors.add("red");
+            colors.add("yellow");
+            colors.add("purple");
+            colors.add("turquoise");
+            colors.add("orange");
+            colors.add("green");
             colors.add("pink");
         }
     }
@@ -102,7 +107,7 @@ public class Cards {
         for (int d = 0; d < 4; d++) {
             for (int e = 0; e < 4; e++) {
                 int index = random.nextInt(colors.size());
-                kartya[d][e] = new Card(colors.get(index), true);
+                playingCards[d][e] = new Card(colors.get(index), true);
                 colors.remove(index);
             }
         }
@@ -128,7 +133,7 @@ public class Cards {
      *
      * @return a {@link Cards} object
      */
-    public static Cards getPeldany() {
+    public static Cards getInstanceCards() {
         if (instance == null) {
             instance = new Cards();
         }
@@ -143,8 +148,8 @@ public class Cards {
      * @return a string, which is the color of the {@link Card} with given
      * parameters
      */
-    public String getKartya(int i, int j) {
-        return kartya[i][j].getColor();
+    public String getCardC(int i, int j) {
+        return playingCards[i][j].getColor();
     }
 
     /**
@@ -153,40 +158,40 @@ public class Cards {
      * @param id id of a button
      * @return a string, which is the color of the {@link Card}
      */
-    public String getSzin(String id) {
+    public String getCardColor(String id) {
         switch (id) {
             case "btn1":
-                return kartya[0][0].getColor();
+                return playingCards[0][0].getColor();
             case "btn2":
-                return kartya[0][1].getColor();
+                return playingCards[0][1].getColor();
             case "btn3":
-                return kartya[0][2].getColor();
+                return playingCards[0][2].getColor();
             case "btn4":
-                return kartya[0][3].getColor();
+                return playingCards[0][3].getColor();
             case "btn5":
-                return kartya[1][0].getColor();
+                return playingCards[1][0].getColor();
             case "btn6":
-                return kartya[1][1].getColor();
+                return playingCards[1][1].getColor();
             case "btn7":
-                return kartya[1][2].getColor();
+                return playingCards[1][2].getColor();
             case "btn8":
-                return kartya[1][3].getColor();
+                return playingCards[1][3].getColor();
             case "btn9":
-                return kartya[2][0].getColor();
+                return playingCards[2][0].getColor();
             case "btn10":
-                return kartya[2][1].getColor();
+                return playingCards[2][1].getColor();
             case "btn11":
-                return kartya[2][2].getColor();
+                return playingCards[2][2].getColor();
             case "btn12":
-                return kartya[2][3].getColor();
+                return playingCards[2][3].getColor();
             case "btn13":
-                return kartya[3][0].getColor();
+                return playingCards[3][0].getColor();
             case "btn14":
-                return kartya[3][1].getColor();
+                return playingCards[3][1].getColor();
             case "btn15":
-                return kartya[3][2].getColor();
+                return playingCards[3][2].getColor();
             case "btn16":
-                return kartya[3][3].getColor();
+                return playingCards[3][3].getColor();
         }
         return "";
     }
@@ -200,37 +205,37 @@ public class Cards {
     public boolean getChecked(String id) {
         switch (id) {
             case "btn1":
-                return kartya[0][0].isCheck();
+                return playingCards[0][0].isCheck();
             case "btn2":
-                return kartya[0][1].isCheck();
+                return playingCards[0][1].isCheck();
             case "btn3":
-                return kartya[0][2].isCheck();
+                return playingCards[0][2].isCheck();
             case "btn4":
-                return kartya[0][3].isCheck();
+                return playingCards[0][3].isCheck();
             case "btn5":
-                return kartya[1][0].isCheck();
+                return playingCards[1][0].isCheck();
             case "btn6":
-                return kartya[1][1].isCheck();
+                return playingCards[1][1].isCheck();
             case "btn7":
-                return kartya[1][2].isCheck();
+                return playingCards[1][2].isCheck();
             case "btn8":
-                return kartya[1][3].isCheck();
+                return playingCards[1][3].isCheck();
             case "btn9":
-                return kartya[2][0].isCheck();
+                return playingCards[2][0].isCheck();
             case "btn10":
-                return kartya[2][1].isCheck();
+                return playingCards[2][1].isCheck();
             case "btn11":
-                return kartya[2][2].isCheck();
+                return playingCards[2][2].isCheck();
             case "btn12":
-                return kartya[2][3].isCheck();
+                return playingCards[2][3].isCheck();
             case "btn13":
-                return kartya[3][0].isCheck();
+                return playingCards[3][0].isCheck();
             case "btn14":
-                return kartya[3][1].isCheck();
+                return playingCards[3][1].isCheck();
             case "btn15":
-                return kartya[3][2].isCheck();
+                return playingCards[3][2].isCheck();
             case "btn16":
-                return kartya[3][3].isCheck();
+                return playingCards[3][3].isCheck();
         }
         return false;
     }
@@ -244,37 +249,37 @@ public class Cards {
     public Card getCard(String id) {
         switch (id) {
             case "btn1":
-                return kartya[0][0];
+                return playingCards[0][0];
             case "btn2":
-                return kartya[0][1];
+                return playingCards[0][1];
             case "btn3":
-                return kartya[0][2];
+                return playingCards[0][2];
             case "btn4":
-                return kartya[0][3];
+                return playingCards[0][3];
             case "btn5":
-                return kartya[1][0];
+                return playingCards[1][0];
             case "btn6":
-                return kartya[1][1];
+                return playingCards[1][1];
             case "btn7":
-                return kartya[1][2];
+                return playingCards[1][2];
             case "btn8":
-                return kartya[1][3];
+                return playingCards[1][3];
             case "btn9":
-                return kartya[2][0];
+                return playingCards[2][0];
             case "btn10":
-                return kartya[2][1];
+                return playingCards[2][1];
             case "btn11":
-                return kartya[2][2];
+                return playingCards[2][2];
             case "btn12":
-                return kartya[2][3];
+                return playingCards[2][3];
             case "btn13":
-                return kartya[3][0];
+                return playingCards[3][0];
             case "btn14":
-                return kartya[3][1];
+                return playingCards[3][1];
             case "btn15":
-                return kartya[3][2];
+                return playingCards[3][2];
             case "btn16":
-                return kartya[3][3];
+                return playingCards[3][3];
         }
         return new Card("", false);
     }
@@ -287,8 +292,8 @@ public class Cards {
      * @param str2 id of a button
      * @return the cards color is equal or not
      */
-    public boolean tesztel(String str1, String str2) {
-        return (getSzin(str1).equals(getSzin(str2)));
+    public boolean testing(String str1, String str2) {
+        return (getCardColor(str1).equals(getCardColor(str2)));
     }
 
     /**
@@ -426,7 +431,7 @@ public class Cards {
      */
     @Override
     public String toString() {
-        return "Cards{" + "totalPairs=" + totalPairs + ", correctPairs=" + correctPairs + ", accuracy=" + accuracy + ", score=" + score + ", kartya=" + kartya + ", colors=" + colors + ", max=" + max + '}';
+        return "Cards{" + "totalPairs=" + totalPairs + ", correctPairs=" + correctPairs + ", accuracy=" + accuracy + ", score=" + score + ", kartya=" + playingCards + ", colors=" + colors + ", max=" + max + '}';
     }
 
 }

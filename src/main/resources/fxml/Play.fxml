@@ -8,7 +8,7 @@
 <AnchorPane id="AnchorPane" prefHeight="347.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.memorygame.controller.PlayingController">
     <children>
         <Button fx:id="button" layoutX="468.0" layoutY="310.0" onAction="#handleButtonAction" text="Exit" />
-        <Label fx:id="label" layoutX="40.0" layoutY="286.0" minHeight="16" minWidth="69" prefHeight="47.0" prefWidth="176.0" text="Rekord" />
+        <Label fx:id="label" layoutX="40.0" layoutY="286.0" minHeight="16" minWidth="69" prefHeight="36.0" prefWidth="138.0" text="Rekord" />
       <Pane fx:id="pane" layoutX="16.0" layoutY="14.0" prefHeight="286.0" prefWidth="427.0">
          <children>
             <Button fx:id="btn1" layoutX="25.0" layoutY="18.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="69.0" />
@@ -29,5 +29,6 @@
             <Button fx:id="btn16" layoutX="341.0" layoutY="220.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="69.0" />
          </children>
       </Pane>
+      <Label fx:id="labelFinal" layoutX="187.0" layoutY="286.0" minHeight="16" minWidth="69" prefHeight="36.0" prefWidth="240.0" />
     </children>
 </AnchorPane>
