@@ -1,4 +1,4 @@
-package com.mycompany.memorygame;
+package com.mycompany.memorygame.controller;
 
 /*-
  * #%L
@@ -22,6 +22,10 @@ package com.mycompany.memorygame;
  * #L%
  */
 
+import com.mycompany.memorygame.database.Database;
+import com.mycompany.memorygame.database.Name;
+import com.mycompany.memorygame.database.NameBuilder;
+import com.mycompany.memorygame.database.NameBuilderImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

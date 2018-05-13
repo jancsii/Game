@@ -1,4 +1,4 @@
-package com.mycompany.memorygame;
+package com.mycompany.memorygame.controller;
 
 /*-
  * #%L
@@ -22,6 +22,8 @@ package com.mycompany.memorygame;
  * #L%
  */
 
+import com.mycompany.memorygame.database.Database;
+import com.mycompany.memorygame.model.Cards;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -76,9 +78,9 @@ public class PlayingController implements Initializable {
     }
     
     /**
-    * To button click returns which {@link Card} corresponds to that button.
+    * To button click returns which {@link com.mycompany.memorygame.model Card} corresponds to that button.
     * 
-    * @return {@link Card}'s color
+    * @return {@link com.mycompany.memorygame.model Card}'s color
     */
     public String megnyomva()
     {
@@ -181,7 +183,7 @@ public class PlayingController implements Initializable {
     }
     
     /**
-    * Method to all button that we can check the {@link Card}s.
+    * Method to all button that we can check the {@link com.mycompany.memorygame.model Card}s.
     */
     public void onClick()
     {   
@@ -269,7 +271,7 @@ public class PlayingController implements Initializable {
                         database.init();
                         database.concatenateXML();
             
-                    }catch(Exception e)
+                    }catch(IOException e)
                     {   
                         LOGGER.error(e.getMessage());
                     }
@@ -324,7 +326,7 @@ public class PlayingController implements Initializable {
         
         cards = Cards.getPeldany();
         database = Database.getPeldany();
-        System.out.println(database);
+        //System.out.println(database);
         database.read();
         label.setText("Rekord: " + String.valueOf(cards.getMax()) + " pont");
     }

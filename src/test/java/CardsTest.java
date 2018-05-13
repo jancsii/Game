@@ -25,7 +25,7 @@
  * and open the template in the editor.
  */
 
-import com.mycompany.memorygame.Cards;
+import com.mycompany.memorygame.model.Cards;
 import java.util.LinkedList;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.memorygame;
+package com.mycompany.memorygame.database;
 
 /*-
  * #%L
@@ -27,6 +27,7 @@ package com.mycompany.memorygame;
  * #L%
  */
 
+import com.mycompany.memorygame.model.Cards;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,7 +42,6 @@ import java.util.LinkedList;
 import java.util.jar.JarFile;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
-import java.util.jar.Manifest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -170,7 +170,7 @@ public class Database{
             
             Element name = doc.createElement("name");
             name.appendChild(doc.createTextNode(data.getNamefield()));
-            System.out.println(data.getNamefield());
+           //System.out.println(data.getNamefield());
             player.appendChild(name);
             
             Element score = doc.createElement("score");
@@ -214,6 +214,8 @@ public class Database{
     
     /**
     * Creates the final {@code datas.xml}.
+    * @throws java.io.FileNotFoundException when file not found
+    * @throws IOException when occured some problem with input or output file
     */
     public void concatenateXML() throws FileNotFoundException, IOException
     {
