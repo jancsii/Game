@@ -213,18 +213,18 @@ public class PlayingController implements Initializable {
                     buttons.get(0).setDisable(true);
                     buttons.get(1).setDisable(true);
                     
-                    LOGGER.info("Total: " + cards.getTotalPairs());
-                    LOGGER.info("Accuracy: " + cards.getAccuracy() + " %");
-                    LOGGER.info("Score: " + cards.getScore());
+                    LOGGER.info("Total: {}" ,cards.getTotalPairs());
+                    LOGGER.info("Accuracy: {} %" ,cards.getAccuracy());
+                    LOGGER.info("Score: {}" ,cards.getScore());
                     LOGGER.debug("End...");
 
                     if (cards.newMaxScore()) {
                         label.setText("Record: " + String.valueOf(cards.getScore()) + " points");
                         labelFinal.setText("Congratulations, New Record: " + cards.getScore());
-                        LOGGER.info("New Record: " + cards.getScore());
+                        LOGGER.info("New Record: {}" ,cards.getScore());
                     } else {
                         labelFinal.setText("Good job, your score: " + cards.getScore());
-                        LOGGER.info("Player's score: " + cards.getScore());
+                        LOGGER.info("Player's score: {}" ,cards.getScore());
                     }
                     database.getCards(cards);
                     database.init();

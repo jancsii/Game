@@ -201,7 +201,7 @@ public class Database {
                 Document doc = db.parse(input);
                 doc.getDocumentElement().normalize();
                 NodeList n = doc.getElementsByTagName("player");
-                LOGGER.info("Quantity of points: " + n.getLength());
+                LOGGER.info("Quantity of points: {}" ,n.getLength());
                 for (int i = 0; i < n.getLength(); i++) {
                     Element e = (Element) n.item(i);
                     scores.add(Integer.parseInt(e.getElementsByTagName("score").item(0).getTextContent()));
